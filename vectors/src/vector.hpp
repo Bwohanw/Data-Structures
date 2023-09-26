@@ -1,0 +1,90 @@
+#include <iostream>
+
+template <typename T>
+Vector<T>::Vector(): capacity_(10), size_(0) {
+    data_ = new T[capacity_];
+}
+
+template <typename T>
+Vector<T>::Vector(const Vector<T>& other) {
+    _copy(other);
+}
+
+template <typename T>
+Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
+    if (this != &other) {
+        _destroy();
+        _copy(other);
+    }
+    return *this;
+}
+
+template <typename T>
+Vector<T>::~Vector() {
+    _destroy();
+}
+
+template <typename T>
+void Vector<T>::_copy(const Vector<T>& other) {
+    capacity_ = other.capacity_;
+    size_ = other.size_;
+    data_ = new T[capacity_];
+
+    for (int i = 0; i < size_; i++) {
+        data_[i] = other.data_[i];
+    }
+}
+
+template <typename T>
+void Vector<T>::_destroy() {
+    capacity_ = 0;
+    size_ = 0;
+    if (data_ != NULL) delete[] data_;
+}
+
+
+template <typename T>
+void Vector<T>::print(std::ostream& os) const {
+    os << "<";
+    for (int i = 0; i < size_; i++) {
+        os << " " << data_[i];
+    }
+    os << " >";
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const Vector<T>& v) {
+    v.print(os);
+    return os;
+}
+
+template <typename T>
+void Vector<T>::push_back(const T& data) {
+    data_[size_++] = data;
+    if (size_ == capacity_) _resize();
+}
+
+template <typename T>
+T& Vector<T>::operator[](int index) {
+    return data_[index];
+}
+
+template <typename T>
+T& Vector<T>::at(int index) {
+    if (index < 0 || index >= size_) {
+        throw std::out_of_range("Invalid Index");
+    }
+    return data_[index];
+}
+
+
+template <typename T>
+void Vector<T>::_resize() {
+    capacity_ *= 2;
+    T* newdata = new T[capacity_];
+    for (int i = 0; i < size_; i++) {
+        newdata[i] = data_[i];
+    }
+    delete[] data_;
+    data_ = newdata;
+}

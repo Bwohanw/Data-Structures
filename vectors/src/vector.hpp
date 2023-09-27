@@ -59,15 +59,21 @@ std::ostream& operator<<(std::ostream& os, const Vector<T>& v) {
 }
 
 template <typename T>
+int Vector<T>::size() const {
+    return size_;
+}
+
+template <typename T>
 void Vector<T>::push_back(const T& data) {
     data_[size_++] = data;
-    if (size_ == capacity_) _resize();
+    checksize();
 }
 
 template <typename T>
 T& Vector<T>::operator[](int index) {
     return data_[index];
 }
+
 
 template <typename T>
 T& Vector<T>::at(int index) {
@@ -77,6 +83,24 @@ T& Vector<T>::at(int index) {
     return data_[index];
 }
 
+template <typename T>
+void Vector<T>::insert(int index, const T& elem) {
+    if (index < 0 || index > size_) {
+        throw std::out_of_range("Invalid Index");
+    }
+    for (int i = size_; i > index; i--) {
+        data_[i] = data_[i-1];
+    }
+    data_[index] = elem;
+    size_ += 1;
+    checksize();
+}
+
+
+template <typename T>
+void Vector<T>::checksize() {
+    if (capacity_ == size_) _resize();
+}
 
 template <typename T>
 void Vector<T>::_resize() {

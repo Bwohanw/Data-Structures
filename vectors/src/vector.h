@@ -17,11 +17,15 @@ class Vector {
 
     void print(std::ostream& os=std::cout) const;
 
+    int size() const;
+
     void push_back(const T& data);
 
     T& operator[](int index);
 
     T& at(int index);
+
+    void insert(int index, const T& elem);
 
 
     private:
@@ -29,6 +33,7 @@ class Vector {
     int size_;
     T* data_ = NULL;
 
+    void checksize();
     void _copy(const Vector<T>& other);
     void _destroy();
     void _resize();

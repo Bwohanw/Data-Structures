@@ -96,6 +96,40 @@ void Vector<T>::insert(int index, const T& elem) {
     checksize();
 }
 
+template <typename T>
+void Vector<T>::removeAt(int index) {
+    if (index < 0 || index >= size_) throw std::out_of_range("Invalid Index");
+    for (int i = index; i < size_ - 1; i++) {
+        data_[i] = data_[i+1];
+    }
+    size_ -= 1;
+}
+
+template <typename T>
+int Vector<T>::firstIndexOf(const T& data) {
+    for (int i = 0; i < size_; i++) {
+        if (data_[i] == data) return i;
+    }
+    return -1;
+}
+
+template <typename T>
+int Vector<T>::lastIndexOf(const T& data) {
+    if (size_ == 0) return -1;
+    for (int i = size_-1; i > 0; i--) {
+        if (data_[i] == data) return i;
+    }
+    return -1;
+}
+
+template <typename T>
+void Vector<T>::reverse() {
+    for (int i = 0; i < size_/2; i++) {
+        T temp = data_[i];
+        data_[i] = data_[size_ - i - 1];
+        data_[size_ - i - 1] = temp;
+    }
+}
 
 template <typename T>
 void Vector<T>::checksize() {

@@ -27,6 +27,14 @@ class Vector {
 
     void insert(int index, const T& elem);
 
+    void removeAt(int index);
+
+    int firstIndexOf(const T& data);
+
+    int lastIndexOf(const T& data);
+
+    void reverse();
+
 
     private:
     int capacity_;

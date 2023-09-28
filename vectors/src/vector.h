@@ -48,4 +48,9 @@ class Vector {
 
 };
 
+template <typename T>
+void mergesort(const Vector<T>& vect);
+
+
 #include "vector.hpp"
+#include "vector-utils.hpp"

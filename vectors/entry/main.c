@@ -17,6 +17,9 @@ int main() {
     v[0] = 19;
     v.reverse();
     std::cout << v << " " << v.firstIndexOf(19) << std::endl;
+    Vector<int> v2 = v;
+    std::cout << v2 << std::endl;
+    mergesort(v);
     // v.at(0) = 10;
     // std::cout << v << std::endl;
     return 0;

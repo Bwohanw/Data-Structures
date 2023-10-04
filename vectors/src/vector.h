@@ -51,7 +51,8 @@ class Vector {
 template <typename T>
 void mergesort(Vector<T>& vect);
 
-
+template <typename T>
+void quicksort(Vector<T>& vect);
 
 #include "vector.hpp"
 #include "vector-utils.hpp"

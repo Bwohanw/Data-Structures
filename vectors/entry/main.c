@@ -19,8 +19,18 @@ int main() {
     std::cout << v << " " << v.firstIndexOf(19) << std::endl;
     Vector<int> v2 = v;
     std::cout << v2 << std::endl;
-    mergesort(v);
+    quicksort(v);
     std::cout << v << std::endl;
+
+    Vector<int> arr;
+    arr.push_back(10);
+    arr.push_back(7);
+    arr.push_back(8);
+    arr.push_back(9);
+    arr.push_back(1);
+    arr.push_back(5);
+    quicksort(arr);
+    std::cout << arr << std::endl;
     // v.at(0) = 10;
     // std::cout << v << std::endl;
     return 0;

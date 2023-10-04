@@ -42,3 +42,42 @@ void merge(Vector<T>& vect, int lower, int mid, int upper) {
         secondpos++;
     }
 }
+
+template <typename T>
+void quicksort(Vector<T>& vect) {
+    quicksort(vect, 0, vect.size());
+}
+
+template <typename T>
+void quicksort(Vector<T>& vect, int lower, int upper) {
+    if (lower >= upper) return;
+    //arbitrarily choose lower as the partition index
+    int partitionIdx = partition(vect, lower, upper, lower);
+    quicksort(vect, lower, partitionIdx);
+    quicksort(vect, partitionIdx+1,upper);
+
+}
+
+template <typename T>
+void swap(Vector<T>& vect, int idx1, int idx2) {
+    T tmp = vect[idx1];
+    vect[idx1] = vect[idx2];
+    vect[idx2] = tmp;
+}
+
+template <typename T>
+int partition(Vector<T>& vect, int lower, int upper, int partitionIdx) {
+    //upper is exclusive
+    upper -= 1;
+    swap(vect, upper,partitionIdx);
+    int counter = lower;
+    for (int i = lower; i < upper; i++) {
+        if (vect[i] < vect[upper]) {
+            swap(vect, i, counter);
+            counter++;
+        }
+    }
+    swap(vect, counter,upper);
+    return counter;
+
+}

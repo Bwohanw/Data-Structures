@@ -31,6 +31,7 @@ int main() {
     arr.push_back(5);
     quicksort(arr);
     std::cout << arr << std::endl;
+    std::cout << binarySearch(arr, 8) << " " << binarySearch(arr, 10) << " " << binarySearch(arr, 1) << " " << binarySearch(arr,0) << std::endl;
     // v.at(0) = 10;
     // std::cout << v << std::endl;
     return 0;

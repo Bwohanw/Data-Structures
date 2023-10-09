@@ -81,3 +81,16 @@ int partition(Vector<T>& vect, int lower, int upper, int partitionIdx) {
     return counter;
 
 }
+
+template <typename T>
+int binarySearch(Vector<T>& vect, const T& target) {
+    int lower = 0;
+    int upper = vect.size();
+    while (lower < upper) {
+        int mid = (lower+upper)/2;
+        if (vect[mid] == target) return mid;
+        else if (vect[mid] < target) lower=mid+1;
+        else upper = mid;
+    }
+    return -1;
+}

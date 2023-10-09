@@ -75,6 +75,7 @@ T& Vector<T>::operator[](int index) {
 }
 
 
+
 template <typename T>
 T& Vector<T>::at(int index) {
     if (index < 0 || index >= size_) {

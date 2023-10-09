@@ -54,5 +54,8 @@ void mergesort(Vector<T>& vect);
 template <typename T>
 void quicksort(Vector<T>& vect);
 
+template <typename T>
+int binarySearch(Vector<T>& vect, const T& target);
+
 #include "vector.hpp"
 #include "vector-utils.hpp"

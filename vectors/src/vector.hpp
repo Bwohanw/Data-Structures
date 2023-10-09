@@ -84,7 +84,6 @@ void Vector<T>::pop_back() {
     //Does not delete the element if it's allocated on the heap;
     if (empty()) throw std::out_of_range("Illegal remove from empty vector");
     size_--;
-    //std::destroy(data_ + size_);
 }
 
 template <typename T>

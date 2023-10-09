@@ -35,5 +35,6 @@ int main() {
     // v.at(0) = 10;
     // std::cout << v << std::endl;
     arr.pop_back();
+    std::cout << arr << std::endl;
     return 0;
 }

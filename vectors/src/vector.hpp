@@ -64,9 +64,27 @@ int Vector<T>::size() const {
 }
 
 template <typename T>
+int Vector<T>::max_size() const {
+    return capacity_;
+}
+
+template <typename T>
+bool Vector<T>::empty() const {
+    return size_ == 0;
+}
+
+template <typename T>
 void Vector<T>::push_back(const T& data) {
     data_[size_++] = data;
     checksize();
+}
+
+template <typename T>
+void Vector<T>::pop_back() {
+    //Does not delete the element if it's allocated on the heap;
+    if (empty()) throw std::out_of_range("Illegal remove from empty vector");
+    size_--;
+    //std::destroy(data_ + size_);
 }
 
 template <typename T>
@@ -74,10 +92,22 @@ T& Vector<T>::operator[](int index) {
     return data_[index];
 }
 
+template <typename T>
+const T& Vector<T>::operator[](int index) const {
+    return data_[index];
+}
 
 
 template <typename T>
 T& Vector<T>::at(int index) {
+    if (index < 0 || index >= size_) {
+        throw std::out_of_range("Invalid Index");
+    }
+    return data_[index];
+}
+
+template <typename T>
+const T& Vector<T>::at(int index) const {
     if (index < 0 || index >= size_) {
         throw std::out_of_range("Invalid Index");
     }

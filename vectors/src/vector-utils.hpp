@@ -83,7 +83,7 @@ int partition(Vector<T>& vect, int lower, int upper, int partitionIdx) {
 }
 
 template <typename T>
-int binarySearch(Vector<T>& vect, const T& target) {
+int binarySearch(const Vector<T>& vect, const T& target) {
     int lower = 0;
     int upper = vect.size();
     while (lower < upper) {

@@ -19,11 +19,21 @@ class Vector {
 
     int size() const;
 
+    int max_size() const;
+
     void push_back(const T& data);
+
+    void pop_back();
+
+    bool empty() const;
 
     T& operator[](int index);
 
+    const T& operator[](int index) const;
+
     T& at(int index);
+
+    const T& at(int index) const;
 
     void insert(int index, const T& elem);
 
@@ -55,7 +65,7 @@ template <typename T>
 void quicksort(Vector<T>& vect);
 
 template <typename T>
-int binarySearch(Vector<T>& vect, const T& target);
+int binarySearch(const Vector<T>& vect, const T& target);
 
 #include "vector.hpp"
 #include "vector-utils.hpp"

@@ -45,6 +45,8 @@ class Vector {
 
     void reverse();
 
+    void clear();
+
 
     private:
     int capacity_;

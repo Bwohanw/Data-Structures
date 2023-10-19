@@ -1,13 +1,22 @@
 #include <iostream>
+#include <string>
 
 template <typename T>
-Vector<T>::Vector(): capacity_(10), size_(0) {
+Vector<T>::Vector(): capacity_(10), size_(0), data_(NULL) {
     data_ = new T[capacity_];
 }
 
 template <typename T>
 Vector<T>::Vector(const Vector<T>& other) {
     _copy(other);
+}
+
+template <typename T>
+Vector<T>::Vector(int size, T data): capacity_(2*size), size_(size), data_(NULL) {
+    data_ = new T[capacity_];
+    for (int i = 0; i < size_; i++) {
+        data_[i] = data;
+    }
 }
 
 template <typename T>
@@ -40,6 +49,7 @@ void Vector<T>::_destroy() {
     capacity_ = 0;
     size_ = 0;
     if (data_ != NULL) delete[] data_;
+    data_ = NULL;
 }
 
 
@@ -175,4 +185,11 @@ void Vector<T>::_resize() {
     }
     delete[] data_;
     data_ = newdata;
+}
+
+template <typename T>
+void Vector<T>::clear() {
+    if (data_ != NULL) delete[] data_;
+    data_ = new T[capacity_];
+    size_ = 0;
 }

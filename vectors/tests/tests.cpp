@@ -63,5 +63,47 @@ int main() {
     vec.print(s);
     assert (s.str() == "< 6 5 4 3 2 1 0 >");
 
+    //test copy constructor and == and !=
+    Vector<int> other(vec);
+    assert(other == vec);
+    assert(!(other != vec));
+
+    //test pop_back
+    while (!other.empty()) {
+        other.pop_back();
+    }
+    assert(other.size() == 0);
+
+    //test []
+    other = vec;
+    other[0] = 1;
+    s.str("");
+    other.print(s);
+    assert(s.str() == "< 1 5 4 3 2 1 0 >");
+
+    //test removeAt
+    other.removeAt(0);
+    other.removeAt(other.size() - 1);
+    s.str("");
+    other.print(s);
+    assert(s.str() == "< 5 4 3 2 1 >");
+
+    //test indexOf methods
+    other.insert(0, 0);
+    other.insert(0,15);
+    other.insert(other.size(), 0);
+    other.push_back(4);
+    assert(other.firstIndexOf(0) == 1);
+    assert(other.lastIndexOf(0) == 7);
+
+
+    //testing reverse
+    other.reverse();
+
+    assert(other[2] == 1);
+    s.str("");
+    other.print(s);
+    assert(s.str() == "< 4 0 1 2 3 4 5 0 15 >");
+
     return 0;
 }

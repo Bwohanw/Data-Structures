@@ -13,6 +13,7 @@ Vector<T>::Vector(const Vector<T>& other) {
 
 template <typename T>
 Vector<T>::Vector(int size, T data): capacity_(2*size), size_(size), data_(NULL) {
+    if (capacity_ == 0) capacity_ = 10; //if size is 0
     data_ = new T[capacity_];
     for (int i = 0; i < size_; i++) {
         data_[i] = data;
@@ -26,6 +27,20 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& other) {
         _copy(other);
     }
     return *this;
+}
+
+template <typename T>
+bool Vector<T>::operator==(const Vector<T>& other) const {
+    if (size_ != other.size_) return false;
+    for (int i = 0; i < size_; i++) {
+        if (data_[i] != other[i]) return false;
+    }
+    return true;
+}
+
+template <typename T>
+bool Vector<T>::operator!=(const Vector<T>& other) const {
+    return !(*this == other); 
 }
 
 template <typename T>

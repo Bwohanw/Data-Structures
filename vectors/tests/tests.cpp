@@ -67,6 +67,7 @@ int main() {
     Vector<int> other(vec);
     assert(other == vec);
     assert(!(other != vec));
+    assert(other != Vector<int>(5,0));
 
     //test pop_back
     while (!other.empty()) {

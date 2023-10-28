@@ -11,6 +11,10 @@ class Vector {
 
     Vector<T>& operator=(const Vector<T>& other);
 
+    bool operator==(const Vector<T>& other) const;
+
+    bool operator!= (const Vector<T>& other) const;
+
     Vector(int numElements, T data);
 
     ~Vector();

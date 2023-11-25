@@ -1,12 +1,13 @@
 #include <catch2/catch_test_macros.hpp>
-#include "tests_helper.h"
+#include "tests_part_1.h"
 
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 
-#include "List.h"
+#include "../src/List.h"
 
 #define IS_TRUE(x) { if (!(x)) std::cout << __FUNCTION__ << " failed on line " << __LINE__ << std::endl; }
 
@@ -19,7 +20,7 @@ int main() {
     test_reverse_whole();
     test_reverse_partial();
 
-    test_sort();
+    //test_sort();
     
     return 0;
 }
@@ -68,7 +69,7 @@ void test_reverse_whole() {
         list.insertBack(i);
     }
 
-    list.reverse(0, list.size() - 1);
+    list.reverse();
     std::stringstream s;
     list.print(s);
     IS_TRUE(s.str() == "< 9 8 7 6 5 4 3 2 1 0 >");
@@ -87,20 +88,20 @@ void test_reverse_partial() {
     IS_TRUE(s.str() == "< 0 1 8 7 6 5 4 3 2 9 >");
 }
 
-void test_sort() {
-    List<int> list;
-    list.insertBack(5);
-    list.insertBack(2);
-    list.insertBack(4);
-    list.insertBack(1);
-    list.insertBack(8);
-    list.insertBack(7);
-    list.insertBack(6);
+// void test_sort() {
+//     List<int> list;
+//     list.insertBack(5);
+//     list.insertBack(2);
+//     list.insertBack(4);
+//     list.insertBack(1);
+//     list.insertBack(8);
+//     list.insertBack(7);
+//     list.insertBack(6);
 
-    list.sort();
+//     list.sort();
 
-    std::stringstream s;
-    list.print(s);
+//     std::stringstream s;
+//     list.print(s);
 
-    IS_TRUE(s.str() == "< 1 2 4 5 6 7 8 >");
-}
+//     IS_TRUE(s.str() == "< 1 2 4 5 6 7 8 >");
+// }

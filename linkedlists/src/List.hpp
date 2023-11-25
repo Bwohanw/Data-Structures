@@ -89,18 +89,82 @@ void List<T>::insertBack(const T& ndata) {
 }
 
 template <typename T>
-List<T>::size() const {
+void List<T>::reverse() {
+    if (length <= 1) return;
+    reverse(0, length - 1);
+}
+
+template <typename T>
+void List<T>::reverse(int start, int stop) {
+    if (start >= stop || stop >= length) return;
+    
+    //gets the portion of the list to reverse
+    ListNode* startpt = step(head, start);
+    ListNode* endpt = step(head, stop);
+
+
+    //disconnects the portion to be removed (will put it back later)
+    ListNode* startprev = startpt->prev;
+    ListNode* endnext = endpt->next;
+    startpt->prev = NULL;
+    endpt->next = NULL;
+    if (startprev != NULL) {
+        startprev->next = NULL;
+    }
+    if (endnext != NULL) {
+        endnext->prev = NULL;
+    }
+
+    ListNode* curr = startpt;
+
+    //while we still have things to reverse, edit the pointers for curr
+    while (curr != NULL) {
+        ListNode* nxt = curr->next;
+        curr->next = curr->prev;
+        curr->prev = nxt;
+        curr = nxt;
+    }
+
+
+    //reconnect back to the whole list
+    //we want to connect startprev to endpt and startpt to endnext
+    endpt->prev = startprev;
+    if (startprev != NULL) {
+        startprev->next = endpt;
+    }
+    startpt->next = endnext;
+    if (endnext != NULL) {
+        endnext->prev = startpt;
+    }
+
+    //resetting head and tail (if necessary)
+    if (startpt == head) head = endpt;
+    if (endpt == tail) tail = startpt;
+}
+
+template <typename T>
+typename List<T>::ListNode* List<T>::step(ListNode* start, int step) {
+    if (step >= length) return NULL;
+    for (int i = 0; i < step; i++) {
+        start = start->next;
+        if (start == NULL) return NULL;
+    }
+    return start;
+}
+
+template <typename T>
+int List<T>::size() const {
     return length;
 }
 
 template <typename T>
-List<T>::empty() const {
+bool List<T>::empty() const {
     return length == 0;
 }
 
 template <typename T>
-void List<T>::print(ostream& os) const {
-    os << "<"
+void List<T>::print(std::ostream& os) const {
+    os << "<";
     ListNode* curr = head;
     while (curr != NULL) {
         os << " " << curr->data;
@@ -110,7 +174,7 @@ void List<T>::print(ostream& os) const {
 }
 
 template <typename T>
-std::ostream& operator<<(ostream& os, const List<T>& list) {
+std::ostream& operator<<(std::ostream& os, const List<T>& list) {
     list.print(os);
     return os;
 }

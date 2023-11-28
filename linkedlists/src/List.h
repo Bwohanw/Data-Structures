@@ -29,7 +29,7 @@ class List {
     void reverse(); //reverses the whole list
     void reverse(int start, int stop);//reverses from index start to index stop (inclusive)
 
-    //void sort();
+    void sort();
 
     private:
 
@@ -44,8 +44,10 @@ class List {
 
     void reverse(ListNode* start, ListNode* stop);
 
-    //ListNode* split(ListNode* start, int splitpoint);
-    //ListNode* merge(ListNode* first, ListNode* second);
+    ListNode* splitmid(ListNode* start);//splits the list in the middle, returns the latter half's head node
+    void merge(ListNode* first, ListNode* second);
+
+    ListNode* mergesort(ListNode* start);
 };
 
 

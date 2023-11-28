@@ -20,7 +20,9 @@ int main() {
     test_reverse_whole();
     test_reverse_partial();
 
-    //test_sort();
+    test_sort();
+    sort_empty();
+    sort_one();
     
     return 0;
 }
@@ -88,20 +90,39 @@ void test_reverse_partial() {
     IS_TRUE(s.str() == "< 0 1 8 7 6 5 4 3 2 9 >");
 }
 
-// void test_sort() {
-//     List<int> list;
-//     list.insertBack(5);
-//     list.insertBack(2);
-//     list.insertBack(4);
-//     list.insertBack(1);
-//     list.insertBack(8);
-//     list.insertBack(7);
-//     list.insertBack(6);
+void test_sort() {
+    List<int> list;
+    list.insertBack(5);
+    list.insertBack(2);
+    list.insertBack(4);
+    list.insertBack(1);
+    list.insertBack(8);
+    list.insertBack(7);
+    list.insertBack(6);
 
-//     list.sort();
+    list.sort();
 
-//     std::stringstream s;
-//     list.print(s);
+    std::stringstream s;
+    list.print(s);
 
-//     IS_TRUE(s.str() == "< 1 2 4 5 6 7 8 >");
-// }
+    std::cout << s.str() << std::endl;
+
+    IS_TRUE(s.str() == "< 1 2 4 5 6 7 8 >");
+}
+
+void sort_empty() {
+    List<int> list;
+    list.sort();
+    std::stringstream s;
+    list.print(s);
+    IS_TRUE(s.str() == "< >");
+}
+
+void sort_one() {
+    List<int> list;
+    list.insertBack(1);
+    list.sort();
+    std::stringstream s;
+    list.print(s);
+    IS_TRUE(s.str() == "< 1 >");
+}

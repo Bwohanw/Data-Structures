@@ -143,6 +143,101 @@ void List<T>::reverse(int start, int stop) {
 }
 
 template <typename T>
+typename List<T>::ListNode* List<T>::splitmid(ListNode* start) {
+    ListNode* mid = start;
+    ListNode* hare = start; //similar strategy to turtle + hare algorithm for linked list cycle detection
+    //the hare moves twice as fast as mid, meaning it gets to the end of the list while mid gets to the middle
+    while (hare != NULL) {
+        hare = hare->next;
+        if (hare != NULL) {
+            mid = mid->next;
+            hare = hare->next;
+        }
+    }
+
+    //check if there's only one node (only start node)
+    if (mid == start) return start;
+
+    //splits the midpoint off from the previous node
+    ListNode* pre = mid->prev;
+    mid->prev = NULL;
+    pre->next = NULL;
+    return mid;
+
+}
+
+//merges 2 sorted lists starting from first and second into 1 big list
+//returns void because head and tail are always being reset
+template <typename T>
+void List<T>::merge(ListNode* first, ListNode* second) {
+    /*sets head
+    I think this is ok because we never use head outside of the initial call to mergesort
+    and also this will set head to the actual head of the list, because the last time merge will be called
+    (when recursing back up), will be the merging of the 2 big halves of the list
+    so the other times we reset head will be overwritten by the last (correct) setting of head
+    */
+    head = first == NULL || second == NULL ? (first == NULL ? second : first) : (first->data < second->data) ? first : second;
+    //LOL this is scuffed but its supposed to set it to the non-null if one is null, or null if both are null
+    //otherwise it sets to the one with smaller data
+
+    //updates whichever one got set to head
+    first = head == first ? first->next : first;
+    second = head == second ? second->next : second;
+
+    ListNode* current = head;
+
+    while (first != NULL && second != NULL) {
+        //finds the next min
+        ListNode* next = first->data < second->data ? first : second;
+
+        //establishes the connection
+        current->next = next;
+        next->prev = current;
+        current = next;
+
+        first = next == first ? first->next : first;
+        second = next == second ? second->next : second;
+    }
+
+    //one of the two is now null
+    while (first != NULL) {
+        tail = first; //sets the tail to the current "last", this is ok by similar logic to setting head
+
+        current->next = first;
+        first->prev = current;
+        current = first;
+        first = first->next;
+    }
+
+    while (second != NULL) {
+        tail = second;
+
+        current->next = second;
+        second->prev = current;
+        current = second;
+        second = second->next;
+    }
+
+    return;
+}
+
+template <typename T>
+typename List<T>::ListNode* List<T>::mergesort(ListNode* start) {
+    ListNode* splitpoint = splitmid(start);
+    if (splitpoint == start) return start;
+
+    start = mergesort(start);
+    splitpoint = mergesort(splitpoint);
+    merge(start, splitpoint);
+    return head;
+}
+
+template <typename T>
+void List<T>::sort() {
+    mergesort(head);
+}
+
+template <typename T>
 typename List<T>::ListNode* List<T>::step(ListNode* start, int step) {
     if (step >= length) return NULL;
     for (int i = 0; i < step; i++) {

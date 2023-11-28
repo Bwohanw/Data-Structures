@@ -12,4 +12,8 @@ void test_reverse_whole();
 
 void test_reverse_partial();
 
-//void test_sort();
+void test_sort();
+
+void sort_empty();
+
+void sort_one();

@@ -89,6 +89,48 @@ void List<T>::insertBack(const T& ndata) {
 }
 
 template <typename T>
+void List<T>::insertAt(int index, const T& data) {
+    if (index < 0 || index > length) return;
+    ListNode* newnode = new ListNode(data);
+    if (index == length) {
+        newnode->prev = tail;
+        if (tail != NULL) tail->next = newnode;
+        tail = newnode;
+        if (head == NULL) head = newnode;
+        length++;
+        return;
+    }
+    ListNode* insertnode = step(head, index);
+    insertnode->prev = newnode;
+    newnode->next = insertnode;
+    if (head->prev != NULL) head = head->prev;
+    if (tail->next != NULL) tail = tail->next;
+    length++;
+}
+
+template <typename T>
+void List<T>::removeAt(int index) {
+    if (index < 0 || index >= length) return;
+    ListNode* toremove = step(head, index);
+    ListNode* prev = toremove->prev;
+    ListNode* next = toremove->next;
+    if (prev != NULL) {
+        prev->next = next;
+    }
+    if (next != NULL) {
+        next->prev = prev;
+    }
+    if (toremove == head) {
+        head = next;
+    }
+    if (toremove == tail) {
+        tail = prev;
+    }
+    delete toremove;
+    length--;
+}
+
+template <typename T>
 void List<T>::reverse() {
     if (length <= 1) return;
     reverse(0, length - 1);

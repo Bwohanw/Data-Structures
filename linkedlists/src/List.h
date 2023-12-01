@@ -26,6 +26,8 @@ class List {
 
     void insertFront(const T& data);
     void insertBack(const T& data);
+    void insertAt(int index, const T& data);
+    void removeAt(int index);
     void reverse(); //reverses the whole list
     void reverse(int start, int stop);//reverses from index start to index stop (inclusive)
 

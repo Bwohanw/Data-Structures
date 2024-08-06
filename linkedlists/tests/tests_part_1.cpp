@@ -1,4 +1,4 @@
-#include <catch2/catch_test_macros.hpp>
+//#include <catch2/catch_test_macros.hpp>
 #include "tests_part_1.h"
 
 #include <algorithm>
@@ -23,6 +23,7 @@ int main() {
     test_sort();
     sort_empty();
     sort_one();
+
     
     return 0;
 }

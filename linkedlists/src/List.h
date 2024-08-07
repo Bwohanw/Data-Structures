@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <stdexcept>
 
 template <typename T>
 class List {
@@ -43,8 +44,6 @@ class List {
 
     void _copy(const List<T>& other);
     void _destroy();
-
-    void reverse(ListNode* start, ListNode* stop);
 
     ListNode* splitmid(ListNode* start);//splits the list in the middle, returns the latter half's head node
     void merge(ListNode* first, ListNode* second);

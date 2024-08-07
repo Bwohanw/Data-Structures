@@ -90,7 +90,7 @@ void List<T>::insertBack(const T& ndata) {
 
 template <typename T>
 void List<T>::insertAt(int index, const T& data) {
-    if (index < 0 || index > length) return;
+    if (index < 0 || index > length) throw std::out_of_range("index out of range");
     ListNode* newnode = new ListNode(data);
     if (index == length) {
         newnode->prev = tail;
@@ -101,6 +101,8 @@ void List<T>::insertAt(int index, const T& data) {
         return;
     }
     ListNode* insertnode = step(head, index);
+    newnode->prev = insertnode->prev;
+    if (newnode->prev != NULL) newnode->prev->next = newnode;
     insertnode->prev = newnode;
     newnode->next = insertnode;
     if (head->prev != NULL) head = head->prev;
@@ -110,7 +112,7 @@ void List<T>::insertAt(int index, const T& data) {
 
 template <typename T>
 void List<T>::removeAt(int index) {
-    if (index < 0 || index >= length) return;
+    if (index < 0 || index >= length) throw std::out_of_range("index out of range");
     ListNode* toremove = step(head, index);
     ListNode* prev = toremove->prev;
     ListNode* next = toremove->next;
@@ -138,7 +140,7 @@ void List<T>::reverse() {
 
 template <typename T>
 void List<T>::reverse(int start, int stop) {
-    if (start >= stop || stop >= length) return;
+    if (start >= stop || stop >= length) throw std::out_of_range("invalid index/indices");
     
     //gets the portion of the list to reverse
     ListNode* startpt = step(head, start);

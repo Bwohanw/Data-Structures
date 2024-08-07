@@ -24,6 +24,12 @@ int main() {
     sort_empty();
     sort_one();
 
+
+    test_insert_at();
+
+
+    test_failures();
+
     
     return 0;
 }
@@ -126,4 +132,62 @@ void sort_one() {
     std::stringstream s;
     list.print(s);
     IS_TRUE(s.str() == "< 1 >");
+}
+
+
+void test_insert_at() {
+    List<std::string> list;
+    list.insertBack("bello");
+    list.insertFront("world");
+    list.insertFront("hello");
+    list.insertAt(0, "zero");
+    list.insertAt(1, "one");
+    list.insertAt(5,"last");
+    std::stringstream s;
+    list.print(s);
+
+    IS_TRUE(s.str() == "< zero one hello world bello last >");
+
+    list.reverse();
+
+    s = std::stringstream();
+    list.print(s);
+    IS_TRUE(s.str() == "< last bello world hello one zero >");
+}
+
+void test_failures() {
+    List<std::string> list;
+    list.insertBack("hello");
+    list.insertBack("world");
+    list.insertFront("goodbye");
+    try {
+        list.insertAt(-1, "bello");
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
+
+    try {
+        list.insertAt(4, "bello");
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
+    
+
+    try {
+        list.removeAt(-1);
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
+
+    try {
+        list.removeAt(3);
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
+
+    try {
+        list.reverse(-1, 2);
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
+
+    try {
+        list.reverse(0, 3);
+    } catch (std::out_of_range e) {}
+    catch (...) {IS_TRUE(false);}
 }

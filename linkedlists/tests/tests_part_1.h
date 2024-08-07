@@ -17,3 +17,7 @@ void test_sort();
 void sort_empty();
 
 void sort_one();
+
+void test_insert_at();
+
+void test_failures();

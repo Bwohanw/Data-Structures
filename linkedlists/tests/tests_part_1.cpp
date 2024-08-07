@@ -17,6 +17,10 @@ int main() {
     test_insert();
 
 
+    test_eq();
+
+    test_constructors();
+
     test_reverse_whole();
     test_reverse_partial();
 
@@ -43,6 +47,34 @@ void test_insert_front() {
     std::stringstream s;
     l1.print(s);
     IS_TRUE(s.str() == "< 9 8 7 6 5 4 3 2 1 0 >");
+}
+
+void test_eq() {
+    List<int> l1;
+    List<int> l2;
+    List<int> l3;
+    for (int i = 0; i < 10; i++) {
+        l1.insertFront(i);
+        l2.insertFront(i);
+        if (i != 0) l3.insertFront(i);
+    }
+
+    IS_TRUE(l1 == l2);
+    IS_TRUE(l2 != l3);
+    IS_TRUE(l1 != l3);
+}
+
+void test_constructors() {
+    List<int> list;
+    for (int i = 0; i < 10; i++) {
+        list.insertFront(i);
+    }
+
+    List<int> list2(list);
+    List<int> list3 = list;
+
+    IS_TRUE(list == list2);
+    IS_TRUE(list == list3);
 }
 
 void test_insert_back() {

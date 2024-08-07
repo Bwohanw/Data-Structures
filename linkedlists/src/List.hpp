@@ -4,7 +4,7 @@ List<T>::List(): head(NULL), tail(NULL), length(0) {}
 
 template <typename T>
 List<T>::List(const List<T>& other) {
-    _copy(other);
+    *this = other;
 }
 
 template <typename T>
@@ -60,6 +60,25 @@ void List<T>::_destroy() {
     head = NULL;
     tail = NULL;
     length = 0;
+}
+
+
+template <typename T>
+bool List<T>::operator==(const List<T>& other) const {
+    if (length != other.length) return false;
+    ListNode* h1 = head;
+    ListNode* h2 = other.head;
+    while (h1 != NULL) {
+        if (h1->data != h2->data) return false;
+        h1 = h1->next;
+        h2 = h2->next;
+    }
+    return true;
+}
+
+template <typename T>
+bool List<T>::operator!=(const List<T>& other) const {
+    return !(*this == other);
 }
 
 template <typename T>

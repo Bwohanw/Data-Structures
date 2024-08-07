@@ -21,6 +21,9 @@ class List {
     List<T>& operator=(const List<T>& rhs);
     ~List();
 
+    bool operator==(const List<T>& other) const;
+    bool operator!=(const List<T>& other) const;
+
     int size() const;
     void print(std::ostream& os = std::cout) const;
     bool empty() const;

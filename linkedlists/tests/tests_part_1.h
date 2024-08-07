@@ -4,6 +4,10 @@ int main();
 
 void test_insert_front();
 
+void test_eq();
+
+void test_constructors();
+
 void test_insert_back();
 
 void test_insert();

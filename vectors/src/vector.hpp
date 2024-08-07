@@ -8,7 +8,7 @@ Vector<T>::Vector(): capacity_(10), size_(0), data_(NULL) {
 
 template <typename T>
 Vector<T>::Vector(const Vector<T>& other) {
-    _copy(other);
+    *this = other;
 }
 
 template <typename T>

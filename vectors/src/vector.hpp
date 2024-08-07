@@ -1,5 +1,4 @@
-#include <iostream>
-#include <string>
+
 
 template <typename T>
 Vector<T>::Vector(): capacity_(10), size_(0), data_(NULL) {

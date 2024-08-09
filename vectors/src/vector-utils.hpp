@@ -1,4 +1,3 @@
-#include <map>
 
 template <typename T>
 void mergesort(Vector<T>& vect) {

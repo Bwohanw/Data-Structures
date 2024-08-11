@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../vectors/src/vector.h"
+#include "../../vectors/src/vector.h"
 
 template <typename T>
-class BST {
+class Bst {
     private:
     class TreeNode {
         public:
@@ -17,10 +17,10 @@ class BST {
     };
 
     public:
-    BST();
-    BST(const BST<T>& other);
-    BST<T>& operator=(const BST<T>& other);
-    ~BST();
+    Bst();
+    Bst(const BST<T>& other);
+    Bst<T>& operator=(const BST<T>& other);
+    ~Bst();
 
     void insert(const T& elem);
     void remove(const T& elem);
@@ -40,8 +40,9 @@ class BST {
     TreeNode* root;
     int size;
 
-    _copy(const BST<T>& other);
-    _destroy();
+
+    void _destroy(TreeNode* root);
+    TreeNode* _copy(TreeNode* subRoot);
 
 
 };

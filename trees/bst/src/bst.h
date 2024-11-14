@@ -44,6 +44,8 @@ class Bst {
     void _destroy(TreeNode* root);
     TreeNode* _copy(TreeNode* subRoot);
 
+    void insert(TreeNode*& subRoot, const T& elem);
+
 
 };
 

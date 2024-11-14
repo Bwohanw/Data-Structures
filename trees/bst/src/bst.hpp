@@ -41,7 +41,7 @@ void Bst<T>::_destroy(TreeNode* root) {
 }
 
 template <typename T>
-void Bst<T>::_copy(TreeNode* subRoot) {
+Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
     if (subRoot == NULL) return NULL;
     TreeNode* newNode = new TreeNode(subRoot->data);
     newNode->left = copy(subRoot->left);
@@ -50,3 +50,23 @@ void Bst<T>::_copy(TreeNode* subRoot) {
     if (newNode->right != NULL) newNode->right->parent = newNode;
     return newNode;
 }
+
+
+void Bst<T>::insert(const T& elem) {
+    insert(root, elem);
+}
+
+void Bst<T>::insert(TreeNode*& subRoot, const T& elem) {
+    if (subRoot == NULL) {
+        subRoot = new TreeNode(elem);
+        return;
+    }
+    if (subRoot->data < elem) {
+        insert(subRoot->right, elem);
+        subRoot->right->parent = subRoot;
+    } else {
+        insert(subRoot->left, elem);
+        subroot->left->parent = subRoot;
+    }
+}
+

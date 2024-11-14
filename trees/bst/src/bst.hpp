@@ -6,7 +6,7 @@ template <typename T>
 Bst<T>::TreeNode::TreeNode(const T& data) : data(data), left(NULL), right(NULL), parent(NULL) {};
 
 template <typename T>
-Bst<T>::Bst() : root(NULL), size(0) {}
+Bst<T>::Bst() : root(NULL), size_(0) {}
 
 
 template <typename T>
@@ -14,7 +14,7 @@ Bst<T>& Bst<T>::operator=(const Bst<T>& other) {
     if (this != &other) {
         _destroy(root);
         root = _copy(other.root);
-        size = other.size;
+        size_ = other.size_;
     }
     return *this;
 }
@@ -28,7 +28,7 @@ template <typename T>
 Bst<T>::~Bst() {
     _destroy(root);
     root = NULL;
-    size = 0;
+    size_ = 0;
 }
 
 
@@ -41,7 +41,7 @@ void Bst<T>::_destroy(TreeNode* root) {
 }
 
 template <typename T>
-Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
+typename Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
     if (subRoot == NULL) return NULL;
     TreeNode* newNode = new TreeNode(subRoot->data);
     newNode->left = copy(subRoot->left);
@@ -52,13 +52,16 @@ Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
 }
 
 
+template <typename T>
 void Bst<T>::insert(const T& elem) {
     insert(root, elem);
 }
 
+template <typename T>
 void Bst<T>::insert(TreeNode*& subRoot, const T& elem) {
     if (subRoot == NULL) {
         subRoot = new TreeNode(elem);
+        size_++;
         return;
     }
     if (subRoot->data < elem) {
@@ -66,7 +69,7 @@ void Bst<T>::insert(TreeNode*& subRoot, const T& elem) {
         subRoot->right->parent = subRoot;
     } else {
         insert(subRoot->left, elem);
-        subroot->left->parent = subRoot;
+        subRoot->left->parent = subRoot;
     }
 }
 

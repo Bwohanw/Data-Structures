@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../vectors/src/vector.h"
+#include "../../../vectors/src/vector.h"
 
 template <typename T>
 class Bst {
@@ -18,8 +18,8 @@ class Bst {
 
     public:
     Bst();
-    Bst(const BST<T>& other);
-    Bst<T>& operator=(const BST<T>& other);
+    Bst(const Bst<T>& other);
+    Bst<T>& operator=(const Bst<T>& other);
     ~Bst();
 
     void insert(const T& elem);
@@ -38,7 +38,7 @@ class Bst {
     private:
 
     TreeNode* root;
-    int size;
+    int size_;
 
 
     void _destroy(TreeNode* root);

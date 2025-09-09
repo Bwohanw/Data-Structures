@@ -1,5 +1,3 @@
-
-
 template <typename T>
 Vector<T>::Vector(): capacity_(10), size_(0), data_(NULL) {
     data_ = new T[capacity_];

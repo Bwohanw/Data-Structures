@@ -2,6 +2,12 @@
 
 #include "../../vectors/src/vector.h"
 
+
+enum TraversalType {
+    IN_ORDER,
+    PRE_ORDER,
+    POST_ORDER
+};
 template <typename T>
 class Bst {
     private:
@@ -18,8 +24,8 @@ class Bst {
 
     public:
     Bst();
-    Bst(const BST<T>& other);
-    Bst<T>& operator=(const BST<T>& other);
+    Bst(const Bst<T>& other);
+    Bst<T>& operator=(const Bst<T>& other);
     ~Bst();
 
     void insert(const T& elem);
@@ -36,15 +42,15 @@ class Bst {
 
 
     private:
-
     TreeNode* root;
     int size;
 
 
-    void _destroy(TreeNode* root);
+    void _destroy(TreeNode* subRoot);
     TreeNode* _copy(TreeNode* subRoot);
-
-
+    TreeNode* _insert(TreeNode*& subRoot, const T& elem);
+    TreeNode*& _find(TreeNode*& subRoot, const T& elem);
+    void _traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const;
 };
 
-#include "bst.hpp"
+#include "Bst.hpp"

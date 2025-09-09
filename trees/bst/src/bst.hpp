@@ -1,5 +1,5 @@
 template <typename T>
-Bst<T>::Bst() : root(NULL), size(0) {}
+Bst<T>::Bst() : root(NULL), size_(0) {}
 
 template <typename T>
 Bst<T>::Bst(const Bst<T>& other) {
@@ -11,7 +11,7 @@ Bst<T>& Bst<T>::operator=(const Bst<T>& other) {
     if (this != &other) {
         _destroy(root);
         root = _copy(other.root);
-        size = other.size;
+        size_ = other.size_;
     }
     return *this;
 }
@@ -20,7 +20,7 @@ template <typename T>
 Bst<T>::~Bst() {
     _destroy(root);
     root = NULL;
-    size = 0;
+    size_ = 0;
 }
 
 
@@ -33,7 +33,7 @@ void Bst<T>::_destroy(TreeNode* subRoot) {
 }
 
 template <typename T>
-TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
+typename Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
     if (subRoot == NULL) return NULL;
     TreeNode* newNode = new TreeNode(subRoot->data);
     newNode->left = copy(subRoot->left);
@@ -50,22 +50,23 @@ int Bst<T>::size() const {
 
 template <typename T>
 void Bst<T>::insert(const T& elem) {
-    _insert(root, elem);
+    insert(root, elem);
 }
 
 template <typename T>
-TreeNode* Bst<T>::_insert(TreeNode*& subRoot, const T& elem) {
+void Bst<T>::insert(TreeNode*& subRoot, const T& elem) {
     if (subRoot == NULL) {
         subRoot = new TreeNode(elem);
-        size++;
-        return subRoot;
+        size_++;
+        return;
     }
-    if (subRoot->data == elem) return subRoot;
-    TreeNode* child;
-    if (subRoot->data < elem) child = _insert(subRoot->right, elem);
-    else child = _insert(subRoot->left, elem);
-    child->parent = subRoot;
-    return subRoot;
+    if (subRoot->data < elem) {
+        insert(subRoot->right, elem);
+        subRoot->right->parent = subRoot;
+    } else {
+        insert(subRoot->left, elem);
+        subRoot->left->parent = subRoot;
+    }
 }
 
 template <typename T>
@@ -74,7 +75,7 @@ bool Bst<T>::contains(const T& elem) {
 }
 
 template <typename T>
-TreeNode*& Bst<T>::_find(TreeNode*& subRoot, const T& elem) {
+typename Bst<T>::TreeNode*& Bst<T>::find(TreeNode*& subRoot, const T& elem) {
     if (subRoot == NULL) return NULL;
     if (subRoot->data == elem) return subRoot;
     if (subRoot->data < elem) return _find(subRoot->right, elem);
@@ -126,7 +127,7 @@ Vector<T> Bst<T>::levelOrderTraversal() const {
 }
 
 template <typename T>
-void Bst<T>::_traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const {
+void Bst<T>::traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const {
     if (subRoot == null) return;
     switch (travType) {
         case IN_ORDER:

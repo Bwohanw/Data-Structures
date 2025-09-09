@@ -1,5 +1,5 @@
 template <typename T>
-Vector<T>::Vector(): capacity_(10), size_(0), data_(NULL) {
+Vector<T>::Vector(): capacity_(10), size_(0) {
     data_ = new T[capacity_];
 }
 
@@ -9,7 +9,7 @@ Vector<T>::Vector(const Vector<T>& other) {
 }
 
 template <typename T>
-Vector<T>::Vector(int size, T data): capacity_(2*size), size_(size), data_(NULL) {
+Vector<T>::Vector(int size, T data): capacity_(2*size), size_(size) {
     if (capacity_ == 0) capacity_ = 10; //if size is 0
     data_ = new T[capacity_];
     for (int i = 0; i < size_; i++) {

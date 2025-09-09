@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../vectors/src/vector.h"
+#include "../../../vectors/src/vector.h"
 
 
 enum TraversalType {
@@ -43,14 +43,14 @@ class Bst {
 
     private:
     TreeNode* root;
-    int size;
+    int size_;
 
 
     void _destroy(TreeNode* subRoot);
     TreeNode* _copy(TreeNode* subRoot);
-    TreeNode* _insert(TreeNode*& subRoot, const T& elem);
-    TreeNode*& _find(TreeNode*& subRoot, const T& elem);
-    void _traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const;
+    void insert(TreeNode*& subRoot, const T& elem);
+    TreeNode*& find(TreeNode*& subRoot, const T& elem);
+    void traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const;
 };
 
 #include "Bst.hpp"

@@ -36,8 +36,8 @@ template <typename T>
 typename Bst<T>::TreeNode* Bst<T>::_copy(TreeNode* subRoot) {
     if (subRoot == NULL) return NULL;
     TreeNode* newNode = new TreeNode(subRoot->data);
-    newNode->left = copy(subRoot->left);
-    newNode->right = copy(subRoot->right);
+    newNode->left = _copy(subRoot->left);
+    newNode->right = _copy(subRoot->right);
     if (newNode->left != NULL) newNode->left->parent = newNode;
     if (newNode->right != NULL) newNode->right->parent = newNode;
     return newNode;
@@ -71,35 +71,35 @@ void Bst<T>::insert(TreeNode*& subRoot, const T& elem) {
 
 template <typename T>
 bool Bst<T>::contains(const T& elem) {
-    return _find(subRoot, elem) != NULL;
+    return find(subRoot, elem) != NULL;
 }
 
 template <typename T>
 typename Bst<T>::TreeNode*& Bst<T>::find(TreeNode*& subRoot, const T& elem) {
     if (subRoot == NULL) return NULL;
     if (subRoot->data == elem) return subRoot;
-    if (subRoot->data < elem) return _find(subRoot->right, elem);
-    return _find(subRoot->left, elem);
+    if (subRoot->data < elem) return find(subRoot->right, elem);
+    return find(subRoot->left, elem);
 }
 
 template <typename T>
 Vector<T> Bst<T>::inOrderTraversal() const {
     Vector<T> path;
-    _traverse(root, path, IN_ORDER);
+    traverse(root, path, IN_ORDER);
     return path;
 }
 
 template <typename T>
 Vector<T> Bst<T>::preOrderTraversal() const {
     Vector<T> path;
-    _traverse(root, path, PRE_ORDER);
+    traverse(root, path, PRE_ORDER);
     return path;
 }
 
 template <typename T>
 Vector<T> Bst<T>::postOrderTraversal() const {
     Vector<T> path;
-    _traverse(root, path, POST_ORDER);
+    traverse(root, path, POST_ORDER);
     return path;
 }
 
@@ -131,18 +131,18 @@ void Bst<T>::traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType
     if (subRoot == null) return;
     switch (travType) {
         case IN_ORDER:
-            _traverse(subRoot->left, trav, IN_ORDER);
+            traverse(subRoot->left, trav, IN_ORDER);
             trav.push_back(subRoot->data);
-            _traverse(subRoot->right, trav, IN_ORDER);
+            traverse(subRoot->right, trav, IN_ORDER);
             break;
         case PRE_ORDER:
             trav.push_back(subRoot->data);
-            _traverse(subRoot->left, trav, PRE_ORDER);
-            _traverse(subRoot->right, trav, PRE_ORDER);
+            traverse(subRoot->left, trav, PRE_ORDER);
+            traverse(subRoot->right, trav, PRE_ORDER);
             break;
         case POST_ORDER:
-            _traverse(subRoot->left, trav, POST_ORDER);
-            _traverse(subRoot->right, trav, POST_ORDER);
+            traverse(subRoot->left, trav, POST_ORDER);
+            traverse(subRoot->right, trav, POST_ORDER);
             trav.push_back(subRoot->data);
             break;
     }

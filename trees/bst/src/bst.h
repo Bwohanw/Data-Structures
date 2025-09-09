@@ -48,6 +48,7 @@ class Bst {
 
     void _destroy(TreeNode* subRoot);
     TreeNode* _copy(TreeNode* subRoot);
+    
     void insert(TreeNode*& subRoot, const T& elem);
     TreeNode*& find(TreeNode*& subRoot, const T& elem);
     void traverse(TreeNode* subRoot, Vector<T>& trav, TraversalType travType) const;
